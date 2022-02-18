@@ -1,3 +1,3 @@
-create .env file from template
-install requirements
+create .env file from template <br />
+install requirements <br />
 enjoy :)
