@@ -1,1 +1,1 @@
-worker: python3 zadymka_bot.py
+worker: python3 zadymka-bot.py
