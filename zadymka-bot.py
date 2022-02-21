@@ -38,7 +38,7 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
     if member == bot.user:
         return
-    main_text_channel = await utils.get_text_channels()
+    main_text_channel = utils.get_text_channels()
     szymek, macias, bodzio, wuja = await utils.get_channel_users()
     if before.channel is None and after.channel is not None and member == szymek:
         wuja_response = '<@' + f'{wuja.id}' + '>' + ' Siema wujek niezła honda'

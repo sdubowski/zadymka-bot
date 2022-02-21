@@ -18,8 +18,8 @@ class BotUtils:
     async def get_user_by_id(self, id):
         return await self.client.fetch_user(id)
 
-    async def get_text_channels(self):
-        main_text_channel = await self.client.get_channel(int(os.getenv('MAIN_CHANNEL_ID')))
+    def get_text_channels(self):
+        main_text_channel = self.client.get_channel(int(os.getenv('MAIN_CHANNEL_ID')))
         return main_text_channel
 
     @staticmethod
