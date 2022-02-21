@@ -1,4 +1,4 @@
 create .env file from template <br />
 install requirements <br />
-dwonload ffmpeg <br />
+download ffmpeg <br />
 enjoy :)
