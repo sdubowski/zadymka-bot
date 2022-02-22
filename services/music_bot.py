@@ -20,11 +20,12 @@ class MusicBot(commands.Cog):
         self.volume = 1
 
     # searching the item on youtube
-    def search_yt(self, item):
+    async def search_yt(self, item, ctx):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
             try:
                 info = ydl.extract_info("ytsearch:%s" % item, download=False)['entries'][0]
             except Exception:
+                await ctx.send("ERROR: Can't play this track")
                 return False
 
         return {'source': info['formats'][0]['url'], 'title': info['title']}
@@ -80,10 +81,8 @@ class MusicBot(commands.Cog):
             # you need to be connected so that the bot knows where to go
             await ctx.send("Connect to a voice channel!")
         else:
-            song = self.search_yt(query)
-            if type(song) == type(True):
-                await ctx.send("Jestem dziwką i nie mogę tego pobrać")
-            else:
+            song = await self.search_yt(query, ctx)
+            if type(True) != type(song):
                 await ctx.send("Song added to the queue")
                 self.music_queue.append([song, voice_channel])
 
@@ -125,9 +124,13 @@ class MusicBot(commands.Cog):
         await ctx.send("ŁAJCIOR :call_me:")
         await ctx.send("https://tenor.com/view/pogu-oooo-pogchamp-twitch-gif-24053886")
 
+    @commands.command()
+    async def clear(self, ctx):
+        if self.vc != "" and self.vc:
+            self.vc.stop()
+            self.music_queue = []
+            await ctx.send("Cleared")
 
-        #TODO obsluga bledow z odtwarzaniem - forbidden access do linku z muzyczka, zmienic to ze bota wypierdala po chwilii nieaktywenosci, dodac bass boostera i ustawic go na permissionie :)
-        #TODO zmienic rolnika zeby byl malym tekstem a nie plikiem tekstowym
 
-
-
+        # TODO forbidden access do linku z muzyczka, zmienic to ze bota wypierdala po chwilii nieaktywenosci, dodac bass boostera i ustawic go na permissionie :)
+        # TODO zmienic rolnika zeby byl malym tekstem a nie plikiem tekstowym

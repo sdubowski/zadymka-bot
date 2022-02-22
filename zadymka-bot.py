@@ -34,24 +34,6 @@ async def on_ready():
     print(f'{bot.user} has connected to Discord!')
 
 
-# @bot.event
-# async def on_voice_state_update(member, before, after):
-#     if member == bot.user:
-#         return
-#     main_text_channel = utils.get_text_channels()
-#     szymek, macias, bodzio, wuja = await utils.get_channel_users()
-#     if before.channel is None and after.channel is not None and member == szymek:
-#         wuja_response = '<@' + f'{wuja.id}' + '>' + ' Siema wujek niezła honda'
-#         for i in range(4):
-#             await main_text_channel.send(wuja_response)
-#         await main_text_channel.send(file=discord.File('./resources/honda.gif'))
-#         return
-#
-#     if before.channel is None and after.channel is not None:
-#         await main_text_channel.send("elo kurwa", tts=True)
-#         return
-
-
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
