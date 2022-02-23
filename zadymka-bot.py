@@ -35,6 +35,18 @@ async def on_ready():
 
 
 @bot.event
+async def on_voice_state_update(member, before, after):
+    if member == bot.user:
+        return
+    szymek, macias, bodzio, wuja = await utils.get_channel_users()
+    if member == bodzio:
+        if after.mute:
+            test_channel = utils.get_text_channels()
+            await test_channel.send("Masz gembe pełną śmieci", tts=True)
+            await test_channel.send(file=discord.File('./resources/GarbageMonster.jpg'))
+
+
+@bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
