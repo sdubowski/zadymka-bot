@@ -23,7 +23,7 @@ class MusicBot(commands.Cog):
     async def search_yt(self, item, ctx):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
             try:
-                info = ydl.extract_info("ytsearch:%s" % item, download=False)['entries'][0]
+                info = ydl.extract_info(item, download=False)
             except Exception:
                 await ctx.send("ERROR: Can't play this track")
                 return False
