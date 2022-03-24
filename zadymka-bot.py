@@ -41,9 +41,28 @@ async def on_voice_state_update(member, before, after):
     szymek, macias, bodzio, wuja = await utils.get_channel_users()
     if member == bodzio:
         if after.mute:
-            test_channel = utils.get_text_channels()
-            await test_channel.send("Masz gembe pełną śmieci", tts=True)
-            await test_channel.send(file=discord.File('./resources/GarbageMonster.jpg'))
+            text_channel = utils.get_text_channels()
+            await text_channel.send("Masz gembe pełną śmieci", tts=True)
+            await text_channel.send(file=discord.File('./resources/GarbageMonster.jpg'))
+
+    current_members = list()
+    voice_states = list()
+
+    for voice_channel in member.guild.voice_channels:
+        if len(voice_channel.voice_states) > 0:
+            for states in voice_channel.voice_states:
+                voice_states.append(states)
+
+        if len(voice_channel.members) > 0:
+            for channel_member in voice_channel.members:
+                current_members.append(channel_member)
+
+    if len(voice_states) == 1:
+        bot_member = next(filter(lambda x: x == bot.user, current_members))
+        if bot_member is not None:
+            await leave(bot_member.guild)
+
+
 
 
 @bot.event

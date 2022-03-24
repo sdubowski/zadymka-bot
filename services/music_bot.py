@@ -132,7 +132,5 @@ class MusicBot(commands.Cog):
             await ctx.send("Cleared")
 
 
-        # TODO forbidden access do linku z muzyczka,
-        #  zmienic to ze bota wypierdala po chwilii nieaktywenosci,
-        #  dodac bass boostera i ustawic go na permissionie :)
+        # TODO  dodac bass boostera i ustawic go na permissionie :)
         #  zmienic rolnika zeby byl malym tekstem a nie plikiem tekstowym
